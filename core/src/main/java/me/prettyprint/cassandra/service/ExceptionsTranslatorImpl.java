@@ -38,7 +38,12 @@ public final class ExceptionsTranslatorImpl implements ExceptionsTranslator {
     	// TODO this may be an issue on the Cassandra side which warrants investigation.
     	// I seem to remember these coming back as TimedOutException previously
     	if (original.getCause() instanceof SocketTimeoutException) {
-    		he = new HTimedOutException(original);
+                //Downed node also throws a SocketTimeoutException and is not
+                //bubbled up to HConnectionManager, which keeps the node around
+                //till maxactive has been exhausted. 
+
+    		he = new HectorTransportException(original);
+    		//he = new HTimedOutException(original);
     	} else {
     		he = new HectorTransportException(original);
     	}
