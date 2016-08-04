@@ -6,7 +6,7 @@ package me.prettyprint.hector.api.exceptions;
  */
 public final class HTimedOutException extends HectorException {
 
-  private static final long serialVersionUID = 6830964658496659923L;
+  private static final long serialVersionUID = 6830964658496659924L;
 
   public HTimedOutException(String s) {
     super(s);

@@ -7,6 +7,7 @@ import me.prettyprint.hector.api.exceptions.HCassandraInternalException;
 import me.prettyprint.hector.api.exceptions.HInvalidRequestException;
 import me.prettyprint.hector.api.exceptions.HNotFoundException;
 import me.prettyprint.hector.api.exceptions.HPoolExhaustedException;
+import me.prettyprint.hector.api.exceptions.HSocketTimedOutException;
 import me.prettyprint.hector.api.exceptions.HTimedOutException;
 import me.prettyprint.hector.api.exceptions.HUnavailableException;
 import me.prettyprint.hector.api.exceptions.HectorException;
@@ -42,8 +43,7 @@ public final class ExceptionsTranslatorImpl implements ExceptionsTranslator {
                 //bubbled up to HConnectionManager, which keeps the node around
                 //till maxactive has been exhausted. 
 
-    		he = new HectorTransportException(original);
-    		//he = new HTimedOutException(original);
+    		he = new HSocketTimedOutException(original);
     	} else {
     		he = new HectorTransportException(original);
     	}
